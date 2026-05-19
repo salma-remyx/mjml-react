@@ -15,7 +15,7 @@ import {
 import { render } from "../src/utils/render";
 
 describe("render()", () => {
-  it("should render the HTML", () => {
+  it("should render the HTML", async () => {
     const email = (
       <Mjml>
         <MjmlHead>
@@ -28,14 +28,14 @@ describe("render()", () => {
         </MjmlBody>
       </Mjml>
     );
-    const { html } = render(email, { minify: true });
+    const { html } = await render(email, { minify: true });
     expect(html).toBeDefined();
     expect(html).toContain("<!doctype html>");
     expect(html).toContain("<title>Title</title>");
     expect(html).toContain("<p>Paragraph</p>");
   });
 
-  it("should throw an error if invalid markup is given", () => {
+  it("should throw an error if invalid markup is given", async () => {
     const email = (
       <Mjml>
         <MjmlBody>
@@ -43,12 +43,12 @@ describe("render()", () => {
         </MjmlBody>
       </Mjml>
     );
-    expect(() => render(email)).toThrow(
+    await expect(() => render(email)).rejects.toThrow(
       "Element div doesn't exist or is not registered"
     );
   });
 
-  it("should not throw an error if soft validation level is passed", () => {
+  it("should not throw an error if soft validation level is passed", async () => {
     const email = (
       <Mjml>
         <MjmlBody>
@@ -56,7 +56,7 @@ describe("render()", () => {
         </MjmlBody>
       </Mjml>
     );
-    const { errors } = render(email, {
+    const { errors } = await render(email, {
       validationLevel: "soft",
       minify: false,
     });
@@ -66,7 +66,7 @@ describe("render()", () => {
     );
   });
 
-  it("should handle all prop types (numbers, booleans, strings, objects, etc.) without error", () => {
+  it("should handle all prop types (numbers, booleans, strings, objects, etc.) without error", async () => {
     const email = (
       <Mjml>
         <MjmlBody>
@@ -88,7 +88,7 @@ describe("render()", () => {
         </MjmlBody>
       </Mjml>
     );
-    const { html, errors } = render(email);
+    const { html, errors } = await render(email);
     // Verify no errors when rendering the different prop types
     expect(errors).toHaveLength(0);
     expect(html).toBeDefined();

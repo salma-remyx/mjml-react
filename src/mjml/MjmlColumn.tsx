@@ -24,7 +24,7 @@ export interface IMjmlColumnProps {
   innerBorder?: string;
   innerBorderBottom?: string;
   innerBorderLeft?: string;
-  innerBorderRadius?: string | number;
+  innerBorderRadius?: string;
   innerBorderRight?: string;
   innerBorderTop?: string;
   padding?: string | number;

@@ -1,4 +1,3 @@
-import { minify as htmlMinify } from "html-minifier";
 import mjml2html from "mjml";
 import { MJMLParsingOptions, MJMLJsonObject, MJMLParseError } from "mjml-core";
 import React from "react";
@@ -14,30 +13,21 @@ interface ConvertedHtml {
 export function render(
   email: React.ReactElement,
   options: MJMLParsingOptions = {}
-): ConvertedHtml {
+): Promise<ConvertedHtml> {
   const defaults: MJMLParsingOptions = {
     keepComments: false,
     beautify: false,
     validationLevel: "strict",
+    minifyOptions: {
+      collapseWhitespace: true,
+      minifyCss: true,
+      removeComments: "safe",
+      removeEmptyAttributes: true,
+    },
   };
 
-  const parseResults: ConvertedHtml = mjml2html(renderToMjml(email), {
+  return mjml2html(renderToMjml(email), {
     ...defaults,
     ...options,
-    minify: undefined,
   });
-
-  if (options.minify) {
-    return {
-      html: htmlMinify(parseResults.html, {
-        caseSensitive: true,
-        collapseWhitespace: true,
-        minifyCSS: true,
-        removeComments: true,
-        removeEmptyAttributes: true,
-      }),
-    };
-  }
-
-  return parseResults;
 }

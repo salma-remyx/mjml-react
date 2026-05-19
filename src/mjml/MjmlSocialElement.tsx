@@ -9,6 +9,7 @@ import { convertPropsToMjmlAttributes } from "../utils";
 export interface IMjmlSocialElementProps {
   /** MJML default value: left */
   align?: "left" | "center" | "right";
+  iconPosition?: "left" | "right";
   backgroundColor?: React.CSSProperties["backgroundColor"];
   /** MJML default value: #000 */
   color?: React.CSSProperties["color"];

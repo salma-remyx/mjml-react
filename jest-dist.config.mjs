@@ -4,6 +4,6 @@ import baseConfig from "./jest.config.mjs";
 export default {
   ...baseConfig,
   moduleNameMapper: {
-    "src(.*)$": "<rootDir>/dist$1",
+    "\\.\\./src(.*)$": "<rootDir>/dist$1",
   },
 };

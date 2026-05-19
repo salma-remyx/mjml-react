@@ -25,19 +25,11 @@ V2 is a drop in replacement for https://github.com/wix-incubator/mjml-react/, wi
 
 ## What's new in V3?
 
-We wanted V3 of mjml-react to be fairly easy to migrate to from V2. We will implement more advanced features in V4. The main updates in V3 include:
+We wanted V3 of mjml-react to be fairly easy to migrate to from V2.
 
 - Typescript: mjml-react is now written in typescript which helps ensure correct props are passed to mjml components
 - Full mjml component support: We use an automated script for pulling mjml components and creating a corresponding mjml-react component. This means we get full support of all components available in the latest mjml version
 - Other small changes: add dangerouslySetInnerHTML in mjml-react for mjml ending tags, update testing, add in-code documenation
-
-## What's coming in V4?
-
-In V4 we are exploring exciting features that will make mjml-react even more powerful. This includes:
-
-- Improved prop type safety: help ensure correct formatting for props like padding, width, and height
-
-If you want to be on the cutting edge of what is being released, we are publishing a [v4-main-alpha version](https://www.npmjs.com/package/@faire/mjml-react/v/main-alpha) to npm.
 
 ## Getting Started
 
@@ -64,7 +56,9 @@ import { renderToMjml } from "@faire/mjml-react/utils/renderToMjml";
 import { MJMLParseResults } from "mjml-core";
 import React from "react";
 
-export function renderReactToMjml(email: React.ReactElement): MJMLParseResults {
+export function renderReactToMjml(
+  email: React.ReactElement
+): Promise<MJMLParseResults> {
   return mjml2html(renderToMjml(email));
 }
 ```
@@ -86,7 +80,7 @@ import {
 
 import { renderReactToMjml } from "./renderReactToMjml";
 
-const { html, errors } = renderReactToMjml(
+const { html, errors } = await renderReactToMjml(
   <Mjml>
     <MjmlHead>
       <MjmlTitle>Last Minute Offer</MjmlTitle>
@@ -127,7 +121,13 @@ And as the result you will get a nice looking email HTML (works in mobile too!)
 {
   keepComments: false,
   beautify: false,
-  minify: true,
+  minify: false,
+  minifyOptions: {
+    collapseWhitespace: true,
+    minifyCss: true,
+    removeComments: "safe",
+    removeEmptyAttributes: true,
+  },
   validationLevel: 'strict'
 }
 ```

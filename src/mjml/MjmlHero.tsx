@@ -16,7 +16,6 @@ export interface IMjmlHeroProps {
   backgroundHeight?: string | number;
   backgroundPosition?: React.CSSProperties["backgroundPosition"];
   borderRadius?: React.CSSProperties["borderRadius"];
-  containerBackgroundColor?: string;
   innerBackgroundColor?: string;
   innerPadding?: string | number;
   innerPaddingTop?: string | number;

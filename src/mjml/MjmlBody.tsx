@@ -10,6 +10,7 @@ export interface IMjmlBodyProps {
   /** MJML default value: 600px */
   width?: string | number;
   backgroundColor?: React.CSSProperties["backgroundColor"];
+  id?: string;
   className?: string;
   cssClass?: string;
   mjmlClass?: string;

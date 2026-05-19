@@ -17,7 +17,7 @@ export interface IMjmlCarouselImageProps {
   thumbnailsSrc?: string;
   borderRadius?: React.CSSProperties["borderRadius"];
   tbBorder?: string;
-  tbBorderRadius?: string | number;
+  tbBorderRadius?: string;
   className?: string;
   cssClass?: string;
   mjmlClass?: string;

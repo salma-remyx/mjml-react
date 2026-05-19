@@ -11,6 +11,7 @@ export interface IMjmlAccordionTitleProps {
   color?: React.CSSProperties["color"];
   fontSize?: string | number;
   fontFamily?: string;
+  fontWeight?: string;
   paddingBottom?: string | number;
   paddingLeft?: string | number;
   paddingRight?: string | number;
